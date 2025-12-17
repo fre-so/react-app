@@ -1,4 +1,4 @@
-# Present Beyond — Dev Notes
+# Dev Notes
 
 Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4 + shadcn-style Radix wrappers).
 
