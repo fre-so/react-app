@@ -38,6 +38,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - Ensure Cloudflare credentials are set; `wrangler.jsonc` controls environment.
 - Deploy with `npm run deploy` (runs build first). For type updates against Cloudflare bindings, use `npm run cf-typegen`.
 
-## Notes
+## Important Notes
 - Existing UI components follow shadcn patterns; reuse them to keep styling consistent.
 - Keep new code TypeScript-strict and Tailwind-first; prefer Radix primitives for accessibility.
+- Do not add a manual global reset like `* { margin: 0; padding: 0; box-sizing: border-box; }`—Tailwind v4’s preflight already normalizes base styles.
