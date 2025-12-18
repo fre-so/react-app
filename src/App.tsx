@@ -2,8 +2,8 @@ import './App.css'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-6 text-center">
+    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      <div className="flex h-full w-full flex-col items-center justify-center px-6 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-300">
           Present Beyond
         </p>
