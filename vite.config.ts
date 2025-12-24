@@ -1,3 +1,4 @@
+import path from "path"
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
@@ -10,4 +11,9 @@ export default defineConfig({
     allowedHosts: [".e2b.app", ".bespoker.ai"],
   },
   plugins: [react(), cloudflare(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 })
