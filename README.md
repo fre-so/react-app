@@ -10,7 +10,8 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - Forms/validation: `react-hook-form`, `@hookform/resolvers`, `zod`, `input-otp`.
 - Dates & pickers: `date-fns`, `react-day-picker`.
 - Content: `react-markdown`.
-- Feedback/UX: `sonner` (toasts), `recharts` (charts).
+- Data viz: `recharts`.
+- Feedback/UX: `sonner` (toasts).
 - Animations: `framer-motion`, `gsap`, plus `tw-animate-css`.
 - Carousels: `embla-carousel` for sliders.
 - Scroll narratives: `scrollama`/`react-scrollama` for scroll-driven steps.
@@ -20,7 +21,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - `src/main.tsx`: App bootstrap with React StrictMode.
 - `src/App.tsx`: Present Beyond marketing hero copy (simplified slogan page).
 - `src/index.css` & `src/App.css`: Tailwind v4 setup, Roboto font import, theme tokens, and base styles.
-- `src/components/ui/`: shadcn-style wrappers for Radix (button, input, dialog, tabs, select, table, sheet, drawer, etc.) plus `sonner` wrapper and chart/progress helpers.
+- `src/components/ui/`: shadcn-style wrappers for Radix (button, input, dialog, tabs, select, table, sheet, drawer, etc.) plus `sonner` wrapper and progress helpers.
 - `src/lib/utils.ts`: `cn` helper (`clsx` + `tailwind-merge`).
 - `public/`: static assets served as-is.
 - `index.html`: HTML shell; set product-level metadata (title/description/OG).
