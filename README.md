@@ -3,16 +3,16 @@
 Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4 + shadcn-style Radix wrappers). 
 
 ## Coding Playbook
-- **Start with context**: read `src/App.tsx`, `src/main.tsx`, `src/index.css`, and the needed files in `src/components/ui`. Search with `rg` before editing to mirror existing patterns and props.
+- **Start with context**: read `src/App.tsx`, `src/main.tsx`, `src/index.css`, and the needed files in `src/components/ui`. Search with `grep` before editing to mirror existing patterns and props.
 - **Reuse primitives first**: import from `@/components/ui` (Button/Input/Card/Tabs/Dialog/Sheet/Tooltip/Form/Toast/Chart/etc.) and the `cn` helper from `@/lib/utils`. Keep existing `data-slot`/`data-*` attributes when extending components.
 - **Styling rules**: Tailwind v4 with theme tokens from `:root`; prefer utility classes like `bg-card`, `text-muted-foreground`, and `dark:` variants over ad-hoc colors. Avoid new global resets; Tailwind preflight is already imported in `src/index.css`.
 - **Forms and validation**: use `react-hook-form` + `zod`. Wrap fields with `Form`, `FormField`, `FormItem`, `FormControl`, `FormLabel`, and `FormMessage` from `@/components/ui/form` so errors wire up automatically.
 - **Data fetching/mutations**: use `@tanstack/react-query` hooks instead of raw `fetch` in components. Surface API errors via `sonner` toasts from `@/components/ui/sonner`.
 - **Animation & motion**: prefer `framer-motion` for React animations, `gsap` for timelines, and `tw-animate-css` classes for lightweight effects. Keep transitions expressed via Tailwind utilities where possible.
-- **Theming & layout**: CSS variables already expose light/dark tokens and `@custom-variant dark`; honor them with `dark:` classes rather than hard-coded colors. Place shared layout styles in Tailwind classes instead of inline styles.
+- **Theming & layout**: CSS variables already expose light/dark tokens and `@custom-variant dark`; honor them with `dark:` classes rather than hard-coded colors. Do not modify the `@theme inline` block in `src/index.css`; it maps tokens for Tailwind. Place shared layout styles in Tailwind classes instead of inline styles.
 - **Files & imports**: use the `@/*` alias for source imports. Feature-specific components live in `src/components`; only add to `src/components/ui` when creating reusable primitives that match the existing shadcn patterns.
 - **Public surface**: static assets go under `public/`; page metadata/OG tags live in `index.html`. Keep the Cloudflare worker API inside `worker/index.ts` and update `wrangler.jsonc` if you add bindings.
-- **Verification**: after changes, prefer `npm run lint` for quick checks; `npm run build` should stay green before deploys. Do not introduce new dependencies unless necessary.
+- **Verification**: run `npm run build` to keep type-check/builds green; skip `npm run lint` for now (known issues). Do not introduce new dependencies unless necessary.
 
 ## Stack & Key Dependencies
 - Core: React 19, Vite 7, TypeScript.
@@ -41,8 +41,6 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 ## Scripts
 - `npm run dev` — start Vite dev server with HMR.
 - `npm run build` — type-check (`tsc -b`) then build for production.
-- `npm run preview` — build then preview locally.
-- `npm run lint` — ESLint.
 - `npm run deploy` — build then `wrangler deploy` to Cloudflare Workers.
 - `npm run cf-typegen` — generate Cloudflare types.
 
