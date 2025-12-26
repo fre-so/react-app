@@ -10,6 +10,7 @@ export default defineConfig({
   server: {
     allowedHosts: [".e2b.app", ".bespoker.ai"],
   },
+  envPrefix: ["VITE_", "MAPBOX_"],
   plugins: [react(), cloudflare(), tailwindcss()],
   resolve: {
     alias: {

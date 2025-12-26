@@ -24,10 +24,30 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - Dates & pickers: `date-fns`, `react-day-picker`.
 - Content: `react-markdown`.
 - Feedback/UX: `sonner` (toasts), `recharts` (charts).
+- Maps: `react-map-gl` + `mapbox-gl` (Mapbox GL JS).
 - Animations: `framer-motion`, `gsap`, plus `tw-animate-css`.
 - Carousels: `embla-carousel` for sliders.
 - Scroll narratives: `scrollama`/`react-scrollama` for scroll-driven steps.
 - APIs: `openai` client.
+
+## Maps (react-map-gl)
+1) `MAPBOX_API_TOKEN` is provided via system env; Vite exposes `MAPBOX_*` via `envPrefix`, so you can read it with `import.meta.env.MAPBOX_API_TOKEN` (no `.env` needed).
+2) Import styles and render:
+   ```tsx
+   import 'mapbox-gl/dist/mapbox-gl.css'
+   import { Map, NavigationControl } from 'react-map-gl'
+
+   <div className="h-[480px] w-full overflow-hidden rounded-xl">
+     <Map
+       mapboxAccessToken={import.meta.env.MAPBOX_API_TOKEN}
+       initialViewState={{ longitude: 116.4, latitude: 39.9, zoom: 9 }}
+       mapStyle="mapbox://styles/mapbox/light-v11"
+     >
+       <NavigationControl position="bottom-right" />
+     </Map>
+   </div>
+   ```
+   Ensure the container has explicit height/width; swap `mapStyle` for other Mapbox styles or your own tiles. Vite is configured to expose `MAPBOX_*` env vars via `envPrefix`.
 
 ## Project Structure
 - `src/main.tsx`: App bootstrap with React StrictMode.
