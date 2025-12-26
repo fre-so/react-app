@@ -35,7 +35,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 2) Import styles and render:
    ```tsx
    import 'mapbox-gl/dist/mapbox-gl.css'
-   import { Map, NavigationControl } from 'react-map-gl'
+   import { Map, NavigationControl } from 'react-map-gl/mapbox'
 
    <div className="h-[480px] w-full overflow-hidden rounded-xl">
      <Map
