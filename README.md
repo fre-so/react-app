@@ -29,6 +29,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - Carousels: `embla-carousel` for sliders.
 - Scroll narratives: `scrollama`/`react-scrollama` for scroll-driven steps.
 - APIs: `openai` client.
+- Diagrams: `reactflow` for mind maps/workflows; theme with shadcn tokens (see below).
 
 ## Maps (react-map-gl)
 1) `MAPBOX_API_TOKEN` is provided via system env; Vite exposes `MAPBOX_*` via `envPrefix`, so you can read it with `import.meta.env.MAPBOX_API_TOKEN` (no `.env` needed).
@@ -71,6 +72,20 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 3) Edit components in `src/components/ui` using Tailwind classes; share utilities via `src/lib/utils.ts`.
 4) For animations, prefer `framer-motion` for React components and `gsap` for timelines; lightweight effects can use `tw-animate-css` classes.
 5) Add new styles in `src/index.css` or component-level CSS; Tailwind v4 is imported via `@import "tailwindcss";` (no separate config file).
+
+## React Flow + shadcn styling
+- Import once where you render React Flow: `import 'reactflow/dist/style.css'; import './reactflow-theme.css';`
+- Create `src/reactflow-theme.css` to map React Flow parts to theme vars, e.g.:
+  ```css
+  @layer components {
+    .react-flow__node { @apply rounded-lg border border-border bg-card text-card-foreground shadow-sm; }
+    .react-flow__node.selected { @apply border-primary ring-2 ring-primary/30; }
+    .react-flow__handle { @apply h-2 w-2 rounded-full border border-primary/60 bg-primary; }
+    .react-flow__edge-path { stroke: var(--border); }
+    .react-flow__edge.selected .react-flow__edge-path { stroke: var(--primary); }
+  }
+  ```
+- Nodes can also set `className` (e.g., `bg-card border-border`) and custom node components can use existing shadcn UI pieces.
 
 ## HTML & SEO
 - Update `index.html` head tags for product SEO/preview. Example:
