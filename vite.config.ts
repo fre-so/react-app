@@ -12,6 +12,14 @@ export default defineConfig({
   },
   envPrefix: ["VITE_", "MAPBOX_"],
   plugins: [react(), cloudflare(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        bestPractice: path.resolve(__dirname, "best-practice/index.html"),
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
