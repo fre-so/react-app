@@ -8,7 +8,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - **Styling rules**: Tailwind v4 with theme tokens from `:root`; prefer utility classes like `bg-card`, `text-muted-foreground`, and `dark:` variants over ad-hoc colors. Avoid new global resets; Tailwind preflight is already imported in `src/index.css`.
 - **Forms and validation**: use `react-hook-form` + `zod`. Wrap fields with `Form`, `FormField`, `FormItem`, `FormControl`, `FormLabel`, and `FormMessage` from `@/components/ui/form` so errors wire up automatically.
 - **Data fetching/mutations**: use `@tanstack/react-query` hooks instead of raw `fetch` in components. Surface API errors via `sonner` toasts from `@/components/ui/sonner`.
-- **Animation & motion**: prefer `framer-motion` for React animations, `gsap` for timelines, and `tw-animate-css` classes for lightweight effects. Keep transitions expressed via Tailwind utilities where possible.
+- **Animation & motion**: prefer `motion/react` for React animations, and `tw-animate-css` classes for lightweight effects. Keep transitions expressed via Tailwind utilities where possible.
 - **Theming & layout**: CSS variables already expose light/dark tokens and `@custom-variant dark`; honor them with `dark:` classes rather than hard-coded colors. Do not modify the `@theme inline` block in `src/index.css`; it maps tokens for Tailwind. Place shared layout styles in Tailwind classes instead of inline styles.
 - **Fonts & tokens**: Load fonts before Tailwind (add `@import url(...)`/`@font-face` above `@import "tailwindcss";`) so `font-sans`/`font-serif`/`font-mono` resolve instead of falling back. Use semantic classes (e.g., `bg-card`, `text-muted-foreground`, `rounded-lg`) backed by tokens; if you need new tokens, add them via a dedicated `@theme` block instead of editing the generated `@theme inline`.
 - **Color variables**: Colors in `src/index.css` use `oklch()`. Components that accept CSS vars (inline styles/HTML attrs) can use `var(--chart-1)` directly; do not wrap with `hsl()`/`rgb()`. Recharts SVG props do **not** resolve CSS vars—pass a computed color string instead (e.g., read from `getComputedStyle(document.documentElement).getPropertyValue('--chart-1')` or hardcode the token value).
@@ -26,7 +26,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - Content: `react-markdown`.
 - Feedback/UX: `sonner` (toasts), `recharts` (charts).
 - Maps: `react-map-gl` + `mapbox-gl` (Mapbox GL JS).
-- Animations: `framer-motion`, `gsap`, plus `tw-animate-css`.
+- Animations: `motion/react`, plus `tw-animate-css`.
 - Carousels: `embla-carousel` for sliders.
 - Scroll narratives: `scrollama`/`react-scrollama` for scroll-driven steps.
 - APIs: `openai` client.
@@ -39,7 +39,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
    import 'mapbox-gl/dist/mapbox-gl.css'
    import { Map, NavigationControl } from 'react-map-gl/mapbox'
 
-   <div className="h-[480px] w-full overflow-hidden rounded-xl">
+   <div className="h-120 w-full overflow-hidden rounded-xl">
      <Map
        mapboxAccessToken={import.meta.env.MAPBOX_API_TOKEN}
        initialViewState={{ longitude: 116.4, latitude: 39.9, zoom: 9 }}
@@ -56,10 +56,22 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - `src/App.tsx`: Present Beyond marketing hero copy (simplified slogan page).
 - `src/index.css`: Tailwind v4 setup, font stack, theme tokens, and base styles.
 - `src/components/ui/`: shadcn-style wrappers for Radix (button, input, dialog, tabs, select, table, sheet, drawer, etc.) plus `sonner` wrapper and chart/progress helpers.
+- `src/examples/`: Best-practice examples for common presentation patterns (styleless implementation references).
 - `src/lib/utils.ts`: `cn` helper (`clsx` + `tailwind-merge`).
 - `public/`: static assets served as-is.
 - `index.html`: HTML shell; set product-level metadata (title/description/OG).
 - Config: `vite.config.ts` (React plugin), `tsconfig.*`, `wrangler.jsonc`/`worker-configuration.d.ts` for Cloudflare deployment.
+
+## Presentation Component Examples
+Components in `src/examples/` are styleless implementation references only for common presentation patterns. Do not copy them verbatim; adapt interaction and visual design to your product.
+
+### Sticky Side Scrollytelling (`src/examples/scrollytelling/StickySide.tsx`)
+Use cases: long-form narratives, step-by-step walkthroughs, and story pages that keep media sticky on one side while swapping on scroll (product launches, case studies).
+Notes: steps are long, so the scroll container needs enough height; pass `scrollContainerRef` when inside a nested scroller; you can switch media sides, but account for mobile stacking and readability.
+
+### Highlight Step Scrollytelling (`src/examples/scrollytelling/HighlightStep.tsx`)
+Use cases: narratives that keep a compact step list while highlighting media changes on the other side.
+Notes: scroll distance is controlled by `STEP_SCROLL_DISTANCE`; avoid overly short scroll ranges when there are few steps; each step is clickable, so provide clear copy and understandable media swap rules.
 
 ## Scripts
 - `npm run dev` — start Vite dev server with HMR.
