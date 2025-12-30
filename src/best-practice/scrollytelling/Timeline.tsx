@@ -396,13 +396,6 @@ export default function TimelineScrollytelling({
                       </motion.div>
                     )
                   })}
-                  <motion.div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-1.5 bg-primary/70"
-                    style={{
-                      scaleX: smoothProgress,
-                      transformOrigin: "0% 50%",
-                    }}
-                  />
                 </div>
               </div>
             </div>
