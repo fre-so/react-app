@@ -26,6 +26,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - Content: `react-markdown`.
 - Feedback/UX: `sonner` (toasts), `recharts` (charts).
 - Maps: `react-map-gl` + `mapbox-gl` (Mapbox GL JS).
+- 3D/Graphics: `three` (three.js) for scenes and interactive visuals.
 - Animations: `framer-motion`, `gsap`, plus `tw-animate-css`.
 - Carousels: `embla-carousel` for sliders.
 - Scroll narratives: `scrollama`/`react-scrollama` for scroll-driven steps.
