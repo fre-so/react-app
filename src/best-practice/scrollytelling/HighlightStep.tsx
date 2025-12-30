@@ -12,10 +12,6 @@ type Step = {
   id: string
   title: string
   description: string
-  media: {
-    title: string
-    description: string
-  }
 }
 
 type HighlightStepScrollytellingProps = {
@@ -31,40 +27,24 @@ const DEFAULT_STEPS: Step[] = [
     title: "Define the question",
     description:
       "Anchor the narrative around the decision you want the reader to make. Keep the scope tight and explicit.",
-    media: {
-      title: "Problem frame",
-      description: "A stable canvas that surfaces the stakes.",
-    },
   },
   {
     id: "02",
     title: "Surface the tension",
     description:
       "Highlight what breaks today and why it matters. One or two sentences is enough to create momentum.",
-    media: {
-      title: "Current state",
-      description: "Visualize the friction without changing the layout.",
-    },
   },
   {
     id: "03",
     title: "Contrast the options",
     description:
       "Compare two approaches side by side, calling out the trade-offs in a single concise line.",
-    media: {
-      title: "Option split",
-      description: "Swap the media while the frame stays fixed.",
-    },
   },
   {
     id: "04",
     title: "Commit to the shift",
     description:
       "Close with the next step and the impact. Make the transition feel deliberate, not abrupt.",
-    media: {
-      title: "Decision moment",
-      description: "Reinforce the narrative with a stable focal point.",
-    },
   },
 ]
 
@@ -215,7 +195,7 @@ export default function HighlightStepScrollytelling({
                   return (
                     <motion.div
                       key={step.id}
-                      className="absolute inset-0"
+                      className="absolute inset-0 flex items-center justify-center px-6 text-center"
                       initial={false}
                       animate={{
                         opacity: isActive ? 1 : 0,
@@ -225,17 +205,9 @@ export default function HighlightStepScrollytelling({
                       style={{ pointerEvents: isActive ? "auto" : "none" }}
                       aria-hidden={!isActive}
                     >
-                      <div className="flex h-full items-center justify-center px-6 text-center">
-                        <div className="space-y-2">
-                          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                            {step.id}
-                          </p>
-                          <p className="text-2xl font-semibold text-foreground">
-                            {step.media.title}
-                          </p>
-                          <p className="text-sm text-muted-foreground">{step.media.description}</p>
-                        </div>
-                      </div>
+                      <p className="text-3xl font-semibold text-foreground md:text-4xl">
+                        {step.title}
+                      </p>
                     </motion.div>
                   )
                 })}
