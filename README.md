@@ -57,22 +57,14 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - `src/App.tsx`: Present Beyond marketing hero copy (simplified slogan page).
 - `src/index.css`: Tailwind v4 setup, font stack, theme tokens, and base styles.
 - `src/components/ui/`: shadcn-style wrappers for Radix (button, input, dialog, tabs, select, table, sheet, drawer, etc.) plus `sonner` wrapper and chart/progress helpers.
-- `src/best-practice/`: Best-practice examples for common presentation patterns (styleless implementation references).
+- `src/best-practice/`: Best-practice components for common presentation patterns.
 - `src/lib/utils.ts`: `cn` helper (`clsx` + `tailwind-merge`).
 - `public/`: static assets served as-is.
 - `index.html`: HTML shell; set product-level metadata (title/description/OG).
 - Config: `vite.config.ts` (React plugin), `tsconfig.*`, `wrangler.jsonc`/`worker-configuration.d.ts` for Cloudflare deployment.
 
-## Best-practice Examples
-Components in `src/best-practice/` are styleless implementation references for common presentation patterns, include references for data structure, layout design, and interaction implementation. Do not copy them verbatim; adapt interaction and visual design to your project.
-
-### Sticky Side Scrollytelling (`src/best-practice/scrollytelling/StickySide.tsx`)
-Use cases: long-form narratives, step-by-step walkthroughs, and story pages that keep media sticky on one side while swapping on scroll.
-Notes: steps are long, so the scroll container needs enough height; pass `scrollContainerRef` when inside a nested scroller; you can switch media sides, but account for mobile stacking and readability.
-
-### Highlight Step Scrollytelling (`src/best-practice/scrollytelling/HighlightStep.tsx`)
-Use cases: narratives that keep a compact step list while highlighting media changes on the other side.
-Notes: scroll distance is controlled by `STEP_SCROLL_DISTANCE`; avoid overly short scroll ranges when there are few steps; each step is clickable, so provide clear copy and understandable media swap rules.
+## Best-practice Components
+Read the full docs in `src/best-practice/README.md` before coding for scroll narratives, timelines, and other common presentation patterns.
 
 ## Scripts
 - `npm run dev` — start Vite dev server with HMR.

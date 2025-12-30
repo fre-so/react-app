@@ -371,7 +371,7 @@ export default function TimelineScrollytelling({
               </div>
 
               <div className="w-full">
-                <div className="relative min-h-[22rem] overflow-hidden rounded-xl border border-border bg-muted">
+                <div className="relative min-h-88 overflow-hidden rounded-xl border border-border bg-muted">
                   {steps.map((step, index) => {
                     const isActive = index === activeIndex
                     const inactiveOffset = index < activeIndex ? -20 : 20
