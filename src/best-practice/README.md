@@ -153,19 +153,31 @@ Layout design (horizontal)
   line starts and ends at the center of the first/last dot.
   - `lineInset = 50 / steps.length` percent.
   - The line is rendered before the dots, so dots sit above it.
+  - The line sits at `top = (dotHeight / 2 - 1)px`; with 12px dots this is
+    `top-1.25` (5px) so the 2px line is centered under each dot.
+  - A progress line is nested inside the base line and uses `scaleX` to show
+    scroll progress.
+- Each step item uses `flex-1` for equal width and has no margin/padding or
+  inter-step gap, keeping the line inset math stable.
 - Each dot is centered above a date and title; active dots use a ring accent.
 - Media panel uses `min-h-88` and switches content via stacked layers.
 
 Layout design (vertical)
 - Two columns on large screens: timeline list on one side, sticky media on the
   other (respects `mediaSide`).
-- Timeline line is a vertical rule with a `motion.div` fill that scales on y.
+- Timeline line is a vertical rule with a progress `motion.div` fill that
+  scales on y.
   - The line is absolutely positioned; dots are placed at the same x-center so
     the line passes through each dot center.
+  - The line sits at `left = (dotWidth / 2 - 1)px` (half dot size minus half
+    line thickness). In this layout the dot center is positioned at `left-4`
+    with `-translate-x-1/2`, so the line uses `left-3.75` to stay 1px left of
+    the dot center.
   - Dots are rendered after the line and use background color to cover the line
     underneath, keeping the dot edge crisp.
-- Each list item occupies `min-h-[62vh]` to pace the scroll and allow a
-  full viewport per step.
+- Each list item occupies `min-h-[62vh]` for consistent step height and has no
+  margin/padding or inter-step gap, making line positioning/inset calculations
+  predictable.
 - Cards use tags and background highlights when active.
 - Media panel uses `aspect-4/5`, `min-h-96`, and a rounded border.
 
