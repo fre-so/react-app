@@ -57,14 +57,11 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - `src/App.tsx`: Present Beyond marketing hero copy (simplified slogan page).
 - `src/index.css`: Tailwind v4 setup, font stack, theme tokens, and base styles.
 - `src/components/ui/`: shadcn-style wrappers for Radix (button, input, dialog, tabs, select, table, sheet, drawer, etc.) plus `sonner` wrapper and chart/progress helpers.
-- `src/best-practice/`: Best-practice components for common presentation patterns.
+- `src/best-practice/`: Best practices of common presentation patterns.
 - `src/lib/utils.ts`: `cn` helper (`clsx` + `tailwind-merge`).
 - `public/`: static assets served as-is.
 - `index.html`: HTML shell; set product-level metadata (title/description/OG).
 - Config: `vite.config.ts` (React plugin), `tsconfig.*`, `wrangler.jsonc`/`worker-configuration.d.ts` for Cloudflare deployment.
-
-## Best-practice Components
-Read the full docs in `src/best-practice/README.md` before coding for scroll narratives, timelines, and other common presentation patterns.
 
 ## Scripts
 - `npm run dev` — start Vite dev server with HMR.

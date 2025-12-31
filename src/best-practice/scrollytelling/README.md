@@ -1,7 +1,6 @@
-# Best Practice Components
+# Scrollytelling best practice
 
-This folder is organized by category. Use this doc to pick the right component
-and to reproduce the exact behavior, layout, and interaction details.
+Scrollytelling is a presentation pattern that syncs narrative content with scroll-driven visual changes, using scrolling to trigger state shifts or animations that guide the reader. In presentations, it sets the pace, controls attention, and breaks complex information into staged highlights. Use it when the story benefits from linear reading, steps or phases have a clear order, and visuals strengthen comprehension (product flows, case studies, timelines).
 
 ## General guidelines
 
@@ -14,16 +13,14 @@ and to reproduce the exact behavior, layout, and interaction details.
 - Use stacked `motion.div` layers for media swaps, toggling via opacity and
   directional offsets rather than mounting/unmounting.
 
-## Scrollytelling components
 
 ### StickySideScrollytelling
 
-Path: `src/best-practice/scrollytelling/StickySide.tsx`
-
 Use cases
-- Long-form narrative where each step needs generous vertical space.
-- Strong visual anchor (media) that should remain in view while reading.
-- Works well for product walkthroughs, case studies, or process breakdowns.
+- Stories or explanations that benefit from generous vertical spacing per step.
+- Situations where the layout does not need to be compact and can afford
+  readable, full-height sections.
+- A strong visual anchor (media) should stay in view while reading.
 
 Data shape
 ```ts
@@ -70,9 +67,9 @@ Implementation notes
   jumps.
 - If `steps.length` is 0, the component returns `null`.
 
-### HighlightStepScrollytelling
+Code example: `/home/user/react-app/src/best-practice/scrollytelling/StickySide.tsx`
 
-Path: `src/best-practice/scrollytelling/HighlightStep.tsx`
+### HighlightStepScrollytelling
 
 Use cases
 - Compact, glanceable step list that stays visible while media swaps.
@@ -120,9 +117,9 @@ Implementation notes
 - Active index is clamped on steps length changes.
 - If `steps.length` is 0, the component returns `null`.
 
-### TimelineScrollytelling
+Code example: `/home/user/react-app/src/best-practice/scrollytelling/HighlightStep.tsx`
 
-Path: `src/best-practice/scrollytelling/Timeline.tsx`
+### TimelineScrollytelling
 
 Use cases
 - Chronological or milestone-driven stories.
@@ -215,3 +212,5 @@ Implementation notes
 - `lineInset` is `50 / steps.length` percent, ensuring the progress line does
   not extend beyond the first and last dot.
 - If `steps.length` is 0, the component returns `null`.
+
+Code example: `/home/user/react-app/src/best-practice/scrollytelling/Timeline.tsx`
