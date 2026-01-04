@@ -20,13 +20,14 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - Core: React 19, Vite 7, TypeScript.
 - Styling: Tailwind CSS v4 + `tailwindcss-animate`; utilities `tailwind-merge`, `clsx`, `class-variance-authority`.
 - UI: shadcn-style Radix wrappers (accordion/dialog/dropdown/select/tabs/tooltip/toast etc.), `lucide-react` icons, `vaul` for sheets/drawers, `next-themes` for theme toggling.
-- Data/state: `@tanstack/react-query`.
+- Data/state: `@tanstack/react-query` for server data; `zustand` for lightweight app/global stores without boilerplate.
 - Forms/validation: `react-hook-form`, `@hookform/resolvers`, `zod`, `input-otp`.
 - Dates & pickers: `date-fns`, `react-day-picker`.
 - Content: `react-markdown`.
 - Feedback/UX: `sonner` (toasts), `recharts` (charts).
 - Maps: `react-map-gl` + `mapbox-gl` (Mapbox GL JS).
-- 3D/Graphics: `three` (three.js) for scenes and interactive visuals.
+- 3D/Graphics: `three` (engine) + `@react-three/fiber` (React renderer) + `@react-three/drei` (helpers like controls/loaders) for scenes and interactive visuals.
+- Audio: `tone` for browser synths, sequencing, and scheduled audio cues.
 - Animations: `framer-motion`, `gsap`, plus `tw-animate-css`.
 - Carousels: `embla-carousel` for sliders.
 - Scroll narratives: `scrollama`/`react-scrollama` for scroll-driven steps.
