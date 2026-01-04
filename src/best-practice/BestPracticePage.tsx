@@ -3,6 +3,7 @@ import { useEffect, useState, type ReactNode } from "react"
 import HighlightStepScrollytelling from "@/best-practice/scrollytelling/HighlightStep"
 import StickySideScrollytelling from "@/best-practice/scrollytelling/StickySide"
 import TimelineScrollytelling from "@/best-practice/scrollytelling/Timeline"
+import MapRoute, { type Coordinate } from "@/best-practice/maps/MapRoute"
 import { cn } from "@/lib/utils"
 
 type MediaSide = "left" | "right"
@@ -43,6 +44,11 @@ type BestPracticeNavItem = {
     render: (props: BestPracticeRenderProps) => ReactNode
   }
 }
+
+const MAP_ROUTE_COORDINATES: ReadonlyArray<Coordinate> = [
+  [104.0668, 30.5728],
+  [116.4074, 39.9042],
+]
 
 const CONTROL_CONFIGS: ControlConfigMap = {
   mediaSide: {
@@ -91,6 +97,21 @@ const BEST_PRACTICE_NAV: BestPracticeNavItem[] = [
       description: "Switch between horizontal and vertical timelines to match the story.",
       render: ({ mediaSide, timelineOrientation }) => (
         <TimelineScrollytelling mediaSide={mediaSide} orientation={timelineOrientation} />
+      ),
+    },
+  },
+  {
+    id: "map-route",
+    title: "Map Route",
+    controls: [],
+    section: {
+      eyebrow: "Maps",
+      description: "Preview the Chengdu to Beijing route and auto-fit bounds.",
+      render: () => (
+        <MapRoute
+          className="mx-auto max-w-200"
+          coordinates={MAP_ROUTE_COORDINATES}
+        />
       ),
     },
   },

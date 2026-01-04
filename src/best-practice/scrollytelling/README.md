@@ -12,6 +12,8 @@ Scrollytelling is a presentation pattern that syncs narrative content with scrol
   or `style` bindings for opacity, position, and progress indicators.
 - Use stacked `motion.div` layers for media swaps, toggling via opacity and
   directional offsets rather than mounting/unmounting.
+- Testing/validation: scroll to a mid step (for example, step 2) and verify
+  the sticky media behavior and the active step state match expectations.
 
 
 ### StickySideScrollytelling
@@ -67,7 +69,7 @@ Implementation notes
   jumps.
 - If `steps.length` is 0, the component returns `null`.
 
-Code example: `/home/user/react-app/src/best-practice/scrollytelling/StickySide.tsx`
+Read component code for more details: `/home/user/react-app/src/best-practice/scrollytelling/StickySide.tsx`
 
 ### HighlightStepScrollytelling
 
@@ -117,7 +119,7 @@ Implementation notes
 - Active index is clamped on steps length changes.
 - If `steps.length` is 0, the component returns `null`.
 
-Code example: `/home/user/react-app/src/best-practice/scrollytelling/HighlightStep.tsx`
+Read component code for more details: `/home/user/react-app/src/best-practice/scrollytelling/HighlightStep.tsx`
 
 ### TimelineScrollytelling
 
@@ -179,7 +181,7 @@ Layout design (vertical)
 - Media panel uses `aspect-4/5`, `min-h-96`, and a rounded border.
 
 Interaction implementation
-- Uses `useScroll` with `offset: ["start start", "end end"]` and spring
+- Each step uses `useScroll` with `offset: ["start start", "end end"]` and spring
   smoothing for progress.
 - Active index uses `floor(clampedProgress * (steps.length - 1))`.
 - Timeline dots and cards update style based on active and passed states.
@@ -213,4 +215,4 @@ Implementation notes
   not extend beyond the first and last dot.
 - If `steps.length` is 0, the component returns `null`.
 
-Code example: `/home/user/react-app/src/best-practice/scrollytelling/Timeline.tsx`
+Read component code for more details: `/home/user/react-app/src/best-practice/scrollytelling/Timeline.tsx`
