@@ -1,30 +1,21 @@
-import { useEffect, useState, type ReactNode } from "react"
+import { useEffect, useState } from "react"
 
-import HighlightStepScrollytelling from "@/best-practice/scrollytelling/HighlightStep"
-import StickySideScrollytelling from "@/best-practice/scrollytelling/StickySide"
-import TimelineScrollytelling from "@/best-practice/scrollytelling/Timeline"
-import MapRoute, { type Coordinate } from "@/best-practice/maps/MapRoute"
 import { cn } from "@/lib/utils"
 
-type MediaSide = "left" | "right"
-type TimelineOrientation = "horizontal" | "vertical"
+import type { ComponentsGalleryNavItem, ControlConfigMap as GalleryControlConfigMap } from "./types"
+import { MAPS_NAV_ITEMS, MAPS_CONTROLS } from "./maps"
+import {
+  SCROLLYTELLING_NAV_ITEMS,
+  SCROLLYTELLING_CONTROLS,
+  type MediaSide,
+} from "./scrollytelling"
 
-type BestPracticeRenderProps = {
-  mediaSide: MediaSide
-  timelineOrientation: TimelineOrientation
-}
+const CONTROL_CONFIGS = {
+  ...SCROLLYTELLING_CONTROLS,
+  ...MAPS_CONTROLS,
+} as const satisfies GalleryControlConfigMap
 
-type ControlConfigMap = {
-  mediaSide: {
-    label: string
-    options: Array<{ label: string; value: MediaSide }>
-  }
-  timelineOrientation: {
-    label: string
-    options: Array<{ label: string; value: TimelineOrientation }>
-  }
-}
-
+type ControlConfigMap = typeof CONTROL_CONFIGS
 type ControlId = keyof ControlConfigMap
 
 type ControlStateMap = {
@@ -34,113 +25,41 @@ type ControlStateMap = {
   }
 }
 
-type BestPracticeNavItem = {
-  id: string
-  title: string
-  controls: ControlId[]
-  section: {
-    eyebrow: string
-    description: string
-    render: (props: BestPracticeRenderProps) => ReactNode
-  }
-}
+const COMPONENTS_GALLERY_NAV = [
+  ...SCROLLYTELLING_NAV_ITEMS,
+  ...MAPS_NAV_ITEMS,
+] satisfies ComponentsGalleryNavItem<ControlId>[]
 
-const MAP_ROUTE_COORDINATES: ReadonlyArray<Coordinate> = [
-  [104.0668, 30.5728],
-  [116.4074, 39.9042],
-]
-
-const CONTROL_CONFIGS: ControlConfigMap = {
-  mediaSide: {
-    label: "Media side",
-    options: [
-      { label: "Left", value: "left" },
-      { label: "Right", value: "right" },
-    ],
-  },
-  timelineOrientation: {
-    label: "Timeline layout",
-    options: [
-      { label: "Horizontal", value: "horizontal" },
-      { label: "Vertical", value: "vertical" },
-    ],
-  },
-}
-
-const BEST_PRACTICE_NAV: BestPracticeNavItem[] = [
-  {
-    id: "sticky-side",
-    title: "Sticky Side Scrollytelling",
-    controls: ["mediaSide"],
-    section: {
-      eyebrow: "Scrollytelling",
-      description: "Scroll the steps to change the sticky media panel.",
-      render: ({ mediaSide }) => <StickySideScrollytelling mediaSide={mediaSide} />,
-    },
-  },
-  {
-    id: "highlight-step",
-    title: "Highlight Step Scrollytelling",
-    controls: ["mediaSide"],
-    section: {
-      eyebrow: "Scrollytelling",
-      description: "Keep the steps compact while the media swaps on scroll.",
-      render: ({ mediaSide }) => <HighlightStepScrollytelling mediaSide={mediaSide} />,
-    },
-  },
-  {
-    id: "timeline",
-    title: "Timeline Scrollytelling",
-    controls: ["mediaSide", "timelineOrientation"],
-    section: {
-      eyebrow: "Scrollytelling",
-      description: "Switch between horizontal and vertical timelines to match the story.",
-      render: ({ mediaSide, timelineOrientation }) => (
-        <TimelineScrollytelling mediaSide={mediaSide} orientation={timelineOrientation} />
-      ),
-    },
-  },
-  {
-    id: "map-route",
-    title: "Map Route",
-    controls: [],
-    section: {
-      eyebrow: "Maps",
-      description: "Preview the Chengdu to Beijing route and auto-fit bounds.",
-      render: () => (
-        <MapRoute
-          className="mx-auto max-w-200"
-          coordinates={MAP_ROUTE_COORDINATES}
-        />
-      ),
-    },
-  },
-]
-
-export default function BestPracticePage() {
-  const [activeBestPracticeId, setActiveBestPracticeId] = useState(() => {
+export default function ComponentsGallery() {
+  const [activeComponentId, setActiveComponentId] = useState(() => {
     if (typeof window === "undefined") {
-      return BEST_PRACTICE_NAV[0]?.id ?? ""
+      return COMPONENTS_GALLERY_NAV[0]?.id ?? ""
     }
     const hash = window.location.hash.replace(/^#/, "")
-    const match = BEST_PRACTICE_NAV.find((item) => item.id === hash)
-    return match?.id ?? BEST_PRACTICE_NAV[0]?.id ?? ""
+    const match = COMPONENTS_GALLERY_NAV.find((item) => item.id === hash)
+    return match?.id ?? COMPONENTS_GALLERY_NAV[0]?.id ?? ""
   })
   const [mediaSide, setMediaSide] = useState<MediaSide>("right")
-  const [timelineOrientation, setTimelineOrientation] =
-    useState<TimelineOrientation>("horizontal")
-  const activeBestPractice = BEST_PRACTICE_NAV.find(
-    (item) => item.id === activeBestPracticeId
+  const [mapRouteProgress, setMapRouteProgress] = useState("0.5")
+  const [mapTimelineLayout, setMapTimelineLayout] = useState("vertical")
+  const activeComponent = COMPONENTS_GALLERY_NAV.find(
+    (item) => item.id === activeComponentId
   )
-  const activeControls = activeBestPractice?.controls ?? []
+  const activeControls = activeComponent?.controls ?? []
   const hasControls = activeControls.length > 0
   const controlState: ControlStateMap = {
     mediaSide: { value: mediaSide, onChange: setMediaSide },
-    timelineOrientation: {
-      value: timelineOrientation,
-      onChange: setTimelineOrientation,
+    mapRouteProgress: { value: mapRouteProgress, onChange: setMapRouteProgress },
+    mapTimelineLayout: {
+      value: mapTimelineLayout,
+      onChange: setMapTimelineLayout,
     },
   }
+
+  const parsedMapRouteProgress = Number(mapRouteProgress)
+  const resolvedMapRouteProgress = Number.isFinite(parsedMapRouteProgress)
+    ? parsedMapRouteProgress
+    : undefined
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -148,23 +67,23 @@ export default function BestPracticePage() {
     }
     const handleHashChange = () => {
       const hash = window.location.hash.replace(/^#/, "")
-      const match = BEST_PRACTICE_NAV.find((item) => item.id === hash)
-      const nextId = match?.id ?? BEST_PRACTICE_NAV[0]?.id ?? ""
-      setActiveBestPracticeId((current) => (current === nextId ? current : nextId))
+      const match = COMPONENTS_GALLERY_NAV.find((item) => item.id === hash)
+      const nextId = match?.id ?? COMPONENTS_GALLERY_NAV[0]?.id ?? ""
+      setActiveComponentId((current) => (current === nextId ? current : nextId))
     }
     window.addEventListener("hashchange", handleHashChange)
     return () => window.removeEventListener("hashchange", handleHashChange)
   }, [])
 
   useEffect(() => {
-    if (typeof window === "undefined" || !activeBestPracticeId) {
+    if (typeof window === "undefined" || !activeComponentId) {
       return
     }
-    const nextHash = `#${activeBestPracticeId}`
+    const nextHash = `#${activeComponentId}`
     if (window.location.hash !== nextHash) {
-      window.location.hash = activeBestPracticeId
+      window.location.hash = activeComponentId
     }
-  }, [activeBestPracticeId])
+  }, [activeComponentId])
 
   const renderControl = <Key extends ControlId>(controlId: Key) => {
     const config = CONTROL_CONFIGS[controlId]
@@ -200,14 +119,14 @@ export default function BestPracticePage() {
       <aside className="fixed left-0 top-0 h-screen w-72 border-r border-border p-6">
         <div className="space-y-1">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-            Best Practice
+            Components
           </p>
           <h1 className="text-lg font-semibold">Demo Gallery</h1>
         </div>
 
         <nav className="mt-6 space-y-2">
-          {BEST_PRACTICE_NAV.map((item) => {
-            const isActive = item.id === activeBestPracticeId
+          {COMPONENTS_GALLERY_NAV.map((item) => {
+            const isActive = item.id === activeComponentId
             return (
               <button
                 key={item.id}
@@ -217,7 +136,7 @@ export default function BestPracticePage() {
                   "w-full cursor-pointer border border-border px-3 py-2 text-left text-sm font-medium transition-colors hover:bg-muted/60",
                   isActive && "bg-muted"
                 )}
-                onClick={() => setActiveBestPracticeId(item.id)}
+                onClick={() => setActiveComponentId(item.id)}
               >
                 {item.title}
               </button>
@@ -243,21 +162,22 @@ export default function BestPracticePage() {
 
       <main className="min-h-screen pl-72">
         <div className="p-8">
-          {activeBestPractice ? (
+          {activeComponent ? (
             <section className="space-y-4">
               <div className="min-h-40">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                  {activeBestPractice.section.eyebrow}
+                  {activeComponent.section.eyebrow}
                 </p>
-                <h2 className="mt-2 text-xl font-semibold">{activeBestPractice.title}</h2>
+                <h2 className="mt-2 text-xl font-semibold">{activeComponent.title}</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  {activeBestPractice.section.description}
+                  {activeComponent.section.description}
                 </p>
               </div>
               <div className="border border-border">
-                {activeBestPractice.section.render({
+                {activeComponent.section.render({
                   mediaSide,
-                  timelineOrientation,
+                  mapRouteProgress: resolvedMapRouteProgress,
+                  mapTimelineLayout,
                 })}
               </div>
             </section>
