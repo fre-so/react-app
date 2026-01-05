@@ -18,7 +18,7 @@ export default defineConfig({
         rollupOptions: {
           input: {
             main: path.resolve(__dirname, "index.html"),
-            bestPractice: path.resolve(__dirname, "best-practice/index.html"),
+            components: path.resolve(__dirname, "components.html"),
           },
         },
       },

@@ -29,35 +29,23 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - Animations: `motion/react`, plus `tw-animate-css`.
 - 3D/graphics: `three` for WebGL scenes and interactive 3D elements.
 - Carousels: `embla-carousel` for sliders.
-- Scroll narratives: `scrollama`/`react-scrollama` for scroll-driven steps.
+- Scroll narratives: `useScroll` hook of `motion/react` for scroll-driven steps.
 - APIs: `openai` client.
 - Diagrams: `reactflow` for mind maps/workflows; theme with shadcn tokens (see below).
 
-## Maps (react-map-gl)
-1) `MAPBOX_API_TOKEN` is provided via system env; Vite exposes `MAPBOX_*` via `envPrefix`, so you can read it with `import.meta.env.MAPBOX_API_TOKEN` (no `.env` needed).
-2) Import styles and render:
-   ```tsx
-   import 'mapbox-gl/dist/mapbox-gl.css'
-   import { Map, NavigationControl } from 'react-map-gl/mapbox'
+## Advanced Premitives
+Here are some advanced primitives for complex UI patterns:
+- **Maps**: Check `src/components/maps/README.md` for map components based on `react-map-gl`.
+- **Scrollytelling**: Check `src/components/scrollytelling/README.md` for scrollytelling components.
 
-   <div className="h-120 w-full overflow-hidden rounded-xl">
-     <Map
-       mapboxAccessToken={import.meta.env.MAPBOX_API_TOKEN}
-       initialViewState={{ longitude: 116.4, latitude: 39.9, zoom: 9 }}
-       mapStyle="mapbox://styles/mapbox/light-v11"
-     >
-       <NavigationControl position="bottom-right" />
-     </Map>
-   </div>
-   ```
-   Ensure the container has explicit height/width; swap `mapStyle` for other Mapbox styles or your own tiles. Vite is configured to expose `MAPBOX_*` env vars via `envPrefix`.
+Before creating a new component, prefer use the existing primitives in `src/components` or extend them first.
 
 ## Project Structure
 - `src/main.tsx`: App bootstrap with React StrictMode.
 - `src/App.tsx`: Present Beyond marketing hero copy (simplified slogan page).
 - `src/index.css`: Tailwind v4 setup, font stack, theme tokens, and base styles.
 - `src/components/ui/`: shadcn-style wrappers for Radix (button, input, dialog, tabs, select, table, sheet, drawer, etc.) plus `sonner` wrapper and chart/progress helpers.
-- `src/best-practice/`: Best practices of common presentation patterns.
+- `src/components/`: Reusable components for common presentation patterns.
 - `src/lib/utils.ts`: `cn` helper (`clsx` + `tailwind-merge`).
 - `public/`: static assets served as-is.
 - `index.html`: HTML shell; set product-level metadata (title/description/OG).

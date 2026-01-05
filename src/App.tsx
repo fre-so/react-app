@@ -1,28 +1,5 @@
-import { useEffect, useState } from "react"
-
-import ExamplesPage from "@/examples/ExamplesPage"
-
-function usePathname() {
-  const [pathname, setPathname] = useState(
-    typeof window === "undefined" ? "/" : window.location.pathname
-  )
-
-  useEffect(() => {
-    const handlePopState = () => setPathname(window.location.pathname)
-    window.addEventListener("popstate", handlePopState)
-    return () => window.removeEventListener("popstate", handlePopState)
-  }, [])
-
-  return pathname
-}
 
 function App() {
-  const pathname = usePathname()
-
-  if (pathname.startsWith("/examples")) {
-    return <ExamplesPage />
-  }
-
   return (
     <div className="fixed inset-0 bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       <div className="flex h-full w-full flex-col items-center justify-center px-6 text-center">
