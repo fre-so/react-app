@@ -33,10 +33,10 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - APIs: `openai` client.
 - Diagrams: `reactflow` for mind maps/workflows; theme with shadcn tokens (see below).
 
-## Advanced Premitives
-Here are some advanced primitives for complex UI patterns:
+## Advanced Primitives
+Here are some advanced primitives for specific UI patterns:
 - **Maps**: Check `src/components/maps/README.md` for map components based on `react-map-gl`.
-- **Scrollytelling**: Check `src/components/scrollytelling/README.md` for scrollytelling components.
+- **Scrollytelling**: Check `src/components/scrollytelling/README.md` for scroll narrative components.
 
 Before creating a new component, prefer use the existing primitives in `src/components` or extend them first.
 
