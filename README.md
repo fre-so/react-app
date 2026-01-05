@@ -12,6 +12,7 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 - **Theming & layout**: CSS variables already expose light/dark tokens and `@custom-variant dark`; honor them with `dark:` classes rather than hard-coded colors. Do not modify the `@theme inline` block in `src/index.css`; it maps tokens for Tailwind. Place shared layout styles in Tailwind classes instead of inline styles.
 - **Fonts & tokens**: Load fonts before Tailwind (add `@import url(...)`/`@font-face` above `@import "tailwindcss";`) so `font-sans`/`font-serif`/`font-mono` resolve instead of falling back. Use semantic classes (e.g., `bg-card`, `text-muted-foreground`, `rounded-lg`) backed by tokens; if you need new tokens, add them via a dedicated `@theme` block instead of editing the generated `@theme inline`.
 - **Color variables**: Colors in `src/index.css` use `oklch()`. Components that accept CSS vars (inline styles/HTML attrs) can use `var(--chart-1)` directly; do not wrap with `hsl()`/`rgb()`. Recharts SVG props do **not** resolve CSS vars—pass a computed color string instead (e.g., read from `getComputedStyle(document.documentElement).getPropertyValue('--chart-1')` or hardcode the token value).
+- **Common TS gotchas**: Recharts formatter signatures allow `value` to be `undefined`; type handlers as `(value?: number) => string` and guard before formatting. If a state setter expects `string | null`, coerce incoming numbers to string before set (e.g., `setHoveredId(value == null ? null : String(value))`).
 - **Files & imports**: use the `@/*` alias for source imports. Feature-specific components live in `src/components`; only add to `src/components/ui` when creating reusable primitives that match the existing shadcn patterns.
 - **Public surface**: static assets go under `public/`; page metadata/OG tags live in `index.html`. Keep the Cloudflare worker API inside `worker/index.ts` and update `wrangler.jsonc` if you add bindings.
 - **Verification**: run `npm run build` to keep type-check/builds green; skip `npm run lint` for now (known issues). Do not introduce new dependencies unless necessary.
@@ -65,7 +66,6 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 
 ## Scripts
 - `npm run dev` — start Vite dev server with HMR.
-- `npm run build` — type-check (`tsc -b`) then build for production.
 - `npm run deploy` — build then `wrangler deploy` to Cloudflare Workers.
 - `npm run cf-typegen` — generate Cloudflare types.
 
