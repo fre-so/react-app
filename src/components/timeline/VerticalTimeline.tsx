@@ -40,7 +40,7 @@ export function VerticalTimeline({
   stepClassName,
   mediaClassName,
   stepRatio = 0.5,
-  stepMinHeight = "60vh",
+  stepMinHeight = "80vh",
   mediaMinHeight = "80vh",
   getMediaKey,
   StepComponent,

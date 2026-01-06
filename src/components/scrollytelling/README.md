@@ -72,7 +72,7 @@ export default function Demo() {
 - `className?: string`: section wrapper class.
 - `stepClassName?: string`: wrapper class for each step.
 - `mediaClassName?: string`: wrapper class for media area.
-- `stepMinHeight?: string`: per-step minimum height, default `"60vh"`.
+- `stepMinHeight?: string`: per-step minimum height, default `"80vh"`.
 - `mediaMinHeight?: string`: media panel minimum height, default `"80vh"`.
 - `stepRatio?: number`: step column width ratio (0–1). Media uses `1 - stepRatio`.
 - `getMediaKey?: (stepIndex) => string | number`: group adjacent steps by key.
@@ -132,7 +132,6 @@ export default function Demo() {
     <HighlightStepScrollytelling
       steps={items.length}
       stepScrollDistance={360}
-      mediaMinHeight="60vh"
       StepComponent={Step}
       MediaComponent={Media}
     />

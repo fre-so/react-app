@@ -74,7 +74,7 @@ export default function Demo() {
 - `stepClassName?: string`: step content wrapper class.
 - `mediaClassName?: string`: media wrapper class.
 - `stepRatio?: number`: step column width ratio (0-1), default `0.5`.
-- `stepMinHeight?: string`: per-step minimum height, default `"60vh"`.
+- `stepMinHeight?: string`: per-step minimum height, default `"80vh"`.
 - `mediaMinHeight?: string`: media minimum height, default `"80vh"`.
 - `getMediaKey?: (stepIndex) => string | number`: group adjacent steps by key.
 - `StepComponent`: required, renders step content.

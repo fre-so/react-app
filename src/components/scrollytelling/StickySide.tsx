@@ -90,7 +90,7 @@ export default function StickySideScrollytelling({
   className,
   stepClassName,
   mediaClassName,
-  stepMinHeight = "60vh",
+  stepMinHeight = "80vh",
   mediaMinHeight = "80vh",
   stepRatio = 0.5,
   getMediaKey,
@@ -348,6 +348,7 @@ function StepCard({
   return (
     <motion.article
       ref={cardRef}
+      className="flex flex-col justify-center"
       style={{ opacity, minHeight: stepMinHeight }}
       aria-current={isActive ? "step" : undefined}
     >
