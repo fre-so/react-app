@@ -9,9 +9,11 @@ import {
   SCROLLYTELLING_CONTROLS,
   type MediaSide,
 } from "./scrollytelling"
+import { TIMELINE_NAV_ITEMS, TIMELINE_CONTROLS } from "./timeline"
 
 const CONTROL_CONFIGS = {
   ...SCROLLYTELLING_CONTROLS,
+  ...TIMELINE_CONTROLS,
   ...MAPS_CONTROLS,
 } as const satisfies GalleryControlConfigMap
 
@@ -27,6 +29,7 @@ type ControlStateMap = {
 
 const COMPONENTS_GALLERY_NAV = [
   ...SCROLLYTELLING_NAV_ITEMS,
+  ...TIMELINE_NAV_ITEMS,
   ...MAPS_NAV_ITEMS,
 ] satisfies ComponentsGalleryNavItem<ControlId>[]
 

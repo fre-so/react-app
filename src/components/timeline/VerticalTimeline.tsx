@@ -10,14 +10,14 @@ import {
 
 import { cn } from "@/lib/utils"
 
-import { TimelineMediaGroup } from "./timeline/MediaGroup"
+import { TimelineMediaGroup } from "./MediaGroup"
 import {
   DEFAULT_STEP_COUNT,
   MAX_STEP_COUNT,
   buildMediaGroups,
   type TimelineMediaRenderProps,
   type TimelineStepRenderProps,
-} from "./timeline/utils"
+} from "./utils"
 
 export type VerticalTimelineProps = {
   steps?: number

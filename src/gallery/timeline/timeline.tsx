@@ -1,9 +1,9 @@
-import { HorizontalTimeline } from "@/components/scrollytelling/HorizontalTimeline"
-import { VerticalTimeline } from "@/components/scrollytelling/VerticalTimeline"
+import { HorizontalTimeline } from "@/components/timeline/HorizontalTimeline"
+import { VerticalTimeline } from "@/components/timeline/VerticalTimeline"
 import type {
   TimelineMediaRenderProps,
   TimelineStepRenderProps,
-} from "@/components/scrollytelling/timeline/utils"
+} from "@/components/timeline/utils"
 
 import { cn } from "@/lib/utils"
 
@@ -124,7 +124,7 @@ function TimelineMediaPanel({ stepIndex }: TimelineMediaRenderProps) {
 
 export const VERTICAL_TIMELINE_NAV_ITEM = {
   id: "timeline-vertical",
-  title: "Vertical Timeline Scrollytelling",
+  title: "Vertical Timeline",
   controls: ["mediaSide"],
   section: {
     eyebrow: "Scrollytelling",
@@ -142,7 +142,7 @@ export const VERTICAL_TIMELINE_NAV_ITEM = {
 
 export const HORIZONTAL_TIMELINE_NAV_ITEM = {
   id: "timeline-horizontal",
-  title: "Horizontal Timeline Scrollytelling",
+  title: "Horizontal Timeline",
   controls: [],
   section: {
     eyebrow: "Scrollytelling",

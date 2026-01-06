@@ -35,8 +35,9 @@ Succinct guide for working in this repo (React + TypeScript + Vite + Tailwind v4
 
 ## Advanced Primitives
 Here are some advanced primitives for specific UI patterns:
+- **Scrollytelling**: Check `src/components/scrollytelling/README.md` for scrollytelling components.
+- **Timeline**: Check `src/components/timeline/README.md` for interactive timeline components.
 - **Maps**: Check `src/components/maps/README.md` for map components based on `react-map-gl`.
-- **Scrollytelling**: Check `src/components/scrollytelling/README.md` for scroll narrative components.
 
 Before creating a new component, prefer use the existing primitives in `src/components` or extend them first.
 

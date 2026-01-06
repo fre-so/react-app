@@ -1,6 +1,6 @@
 # Map Components
 
-This folder contains map-focused UI blocks built on Mapbox GL and the scrollytelling timeline primitives. They are designed for storytelling with routes and step-by-step map progress.
+This folder contains map-focused UI blocks built on Mapbox GL and the timeline primitives. They are designed for storytelling with routes and step-by-step map progress.
 
 ## Requirements
 - Set `MAPBOX_API_TOKEN` in your environment (used as `import.meta.env.MAPBOX_API_TOKEN`).

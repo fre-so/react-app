@@ -332,7 +332,7 @@ function StepCard({
     damping: 24,
     mass: 0.2,
   })
-  const opacity = useTransform(smoothProgress, [0, 0.4, 0.6, 1], [0, 1, 1, 0])
+  const opacity = useTransform(smoothProgress, [0, 0.3, 0.6, 1], [0, 1, 1, 0])
 
   useEffect(() => {
     onProgressReady(stepIndex, smoothProgress)
