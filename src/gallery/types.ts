@@ -5,7 +5,6 @@ export type MediaSide = "left" | "right"
 export type GalleryRenderProps = {
   mediaSide: MediaSide
   mapRouteProgress?: number
-  mapTimelineLayout?: "vertical" | "horizontal"
 }
 
 export type ControlOption = {
