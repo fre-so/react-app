@@ -72,6 +72,7 @@
 		"zod": "^4.2.1"
 	},
 	"devDependencies": {
+		"@builder.io/vite-plugin-jsx-loc": "^0.1.1",
 		"@cloudflare/vite-plugin": "^1.19.0",
 		"@eslint/js": "^9.33.0",
 		"@types/node": "^25.0.3",
@@ -86,6 +87,7 @@
 		"typescript": "~5.8.3",
 		"typescript-eslint": "^8.39.1",
 		"vite": "^7.1.2",
+		"vite-plugin-manus-runtime": "^0.0.57",
 		"wrangler": "^4.55.0"
 	}
 }
