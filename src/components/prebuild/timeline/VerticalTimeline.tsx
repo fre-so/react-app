@@ -128,7 +128,7 @@ export function VerticalTimeline({
       >
         <div style={{ flexBasis: 0, flexGrow: computedStepRatio }}>
           <div className="relative">
-            <div className="absolute left-[15px] w-0.5 bg-border" style={{ top: lineInset, bottom: lineInset }}>
+            <div className="absolute left-3.75 w-0.5 bg-border" style={{ top: lineInset, bottom: lineInset }}>
               <motion.div
                 className="h-full w-full bg-primary/70"
                 style={{
