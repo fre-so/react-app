@@ -4,8 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 
 import { cloudflare } from "@cloudflare/vite-plugin";
-import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
-import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -17,8 +15,6 @@ export default defineConfig({
     react(),
     cloudflare(),
     tailwindcss(),
-    jsxLocPlugin(),
-    vitePluginManusRuntime(),
   ],
   environments: {
     client: {
@@ -26,7 +22,6 @@ export default defineConfig({
         rollupOptions: {
           input: {
             main: path.resolve(__dirname, "index.html"),
-            components: path.resolve(__dirname, "components.html"),
           },
         },
       },
