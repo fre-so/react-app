@@ -89,7 +89,7 @@ export default function Demo() {
 
 - Use MapRoute component as MediaComponent:
 ```tsx
-import { Horizimport { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMotionValueEvent } from 'motion/react';
 import { HorizontalTimeline } from '@/components/prebuild/timeline/HorizontalTimeline';
 import { MapRoute } from '@/components/prebuild/maps/MapRoute';

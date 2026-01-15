@@ -33,7 +33,6 @@ type StickySideScrollytellingProps = {
   stepClassName?: string;
   mediaClassName?: string;
   stepMinHeight?: string;
-  mediaMinHeight?: string;
   stepRatio?: number;
   getMediaKey?: (stepIndex: number) => string | number;
   StepComponent: ComponentType<StickySideStepRenderProps>;
@@ -72,15 +71,14 @@ function buildMediaGroups(stepCount: number, getMediaKey: (stepIndex: number) =>
   return groups;
 }
 
-export default function StickySideScrollytelling({
+export function StickySideScrollytelling({
   steps = DEFAULT_STEP_COUNT,
   mediaSide = 'right',
   scrollContainerRef,
   className,
   stepClassName,
   mediaClassName,
-  stepMinHeight = '60vh',
-  mediaMinHeight = '80vh',
+  stepMinHeight = '80vh',
   stepRatio = 0.5,
   getMediaKey,
   StepComponent,
@@ -166,7 +164,7 @@ export default function StickySideScrollytelling({
               visibility: stickyTop === null ? 'hidden' : 'visible',
             }}
           >
-            <div ref={mediaFrameRef} className={cn('relative', mediaClassName)} style={{ minHeight: mediaMinHeight }}>
+            <div ref={mediaFrameRef} className={cn('relative', mediaClassName)} style={{ minHeight: stepMinHeight }}>
               {mediaGroups.map((group) => {
                 const isActive = activeIndex >= group.startIndex && activeIndex <= group.endIndex;
                 const inactiveOffset = group.endIndex < activeIndex ? -24 : 24;

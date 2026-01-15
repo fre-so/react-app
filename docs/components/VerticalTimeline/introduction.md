@@ -19,13 +19,12 @@ Path: `components/prebuild/timeline/VerticalTimeline.tsx`
 **Core principle: Use when a chronological narrative needs a visible progress spine plus a synchronized media panel.**
 
 Selection signals:
-- ✅ Clear sequence (dates, phases, stages) benefits from progress tracking
-- ✅ Each step has distinct media states (image, chart, map, prototype)
-- ✅ Sticky media should stay visible while steps scroll by
-- ✅ You want to group multiple steps under one media state
-- ✅ 4-8 milestones (beyond 8 starts to feel crowded)
-- ❌ Avoid: No natural ordering or sequence
-- ❌ Avoid: Content can be summarized in a single static panel
+- ✅ Content follows clear temporal sequence (dates, phases, stages)
+- ✅ Reader needs to understand "where they are" in the overall progression
+- ✅ Each step has distinct visual/media representation
+- ✅ 4-10 major milestones (too few = overkill, too many = cluttered)
+- ❌ Avoid: Non-sequential content or concepts with no natural ordering
+- ❌ Avoid: Steps too numerous (>12) or too sparse (<3)
 
 ## Use Cases
 

@@ -1,6 +1,7 @@
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from 'recharts';
 
-import StickySideScrollytelling, {
+import {
+  StickySideScrollytelling,
   type StickySideMediaRenderProps,
   type StickySideStepRenderProps,
 } from '@/components/prebuild/scrollytelling/StickySide';
@@ -69,7 +70,7 @@ export function RadarStickySideSection({ mediaSide }: RadarStickySideSectionProp
       mediaSide={mediaSide}
       steps={RADAR_STICKY_STEPS.length}
       stepRatio={0.4}
-      mediaMinHeight="60vh"
+      stepMinHeight="60vh"
       getMediaKey={() => 'radar-sticky'}
       StepComponent={RadarStickySideStep}
       MediaComponent={RadarStickySideMedia}

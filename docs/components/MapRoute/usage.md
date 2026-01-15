@@ -16,35 +16,17 @@
 
 - Basic Example:
 ```tsx
-import MapRoute, { type Coordinate } from "@/components/prebuild/maps/MapRoute"
+import { MapRoute, type Coordinate } from '@/components/prebuild/maps/MapRoute';
 
-const route: Coordinate[] = [
-  [116.391, 39.907],
-  [116.397, 39.908],
-  [116.403, 39.915],
-  [116.410, 39.920],
-]
+const MAP_ROUTE_COORDINATES: ReadonlyArray<Coordinate> = [
+  [104.0668, 30.5728],
+  [108.9398, 34.3416],
+  [113.6254, 34.7466],
+  [116.4074, 39.9042],
+];
 
-export default function Demo() {
-  return <MapRoute route={route} />
-}
-```
-
-With progress control:
-```tsx
-import { useState } from "react"
-import MapRoute, { type Coordinate } from "@/components/prebuild/maps/MapRoute"
-
-const route: Coordinate[] = [
-  [116.391, 39.907],
-  [116.397, 39.908],
-  [116.403, 39.915],
-  [116.410, 39.920],
-]
-
-export default function Demo() {
-  const [progress, setProgress] = useState(0.5)
-  return <MapRoute route={route} progress={progress} />
+export function MapRoutePreview({ progress }: { progress?: number }) {
+  return <MapRoute className="mx-auto max-w-200" route={MAP_ROUTE_COORDINATES} progress={progress} />;
 }
 ```
 

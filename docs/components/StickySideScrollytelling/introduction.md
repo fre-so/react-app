@@ -10,19 +10,19 @@ Path: `components/prebuild/scrollytelling/StickySide.tsx`
 **Interaction:**
 - As user scrolls through steps, sticky media updates to match active step
 - Step activation triggers at 33% ~ 66% viewport entry
-- Media can be any component, including interactive maps, charts, or data visualizations
+- Media can be any component, including interactive maps, charts, or any custom components
 
 ## When to Use
 
 **Core principle: Use when you need a persistent media panel that updates as a step-by-step narrative unfolds.**
 
 Selection signals:
-- ✅ Media should stay fixed while the story advances through discrete steps
-- ✅ Media is interactive (map/chart/dashboard) or needs to animate with scroll progress
-- ✅ Step-by-step narration benefits from synchronized visuals rather than standalone sections
-- ✅ You want to group multiple steps under one media state (via media grouping)
-- ❌ Avoid: No relationship between the steps and the visual state
-- ❌ Avoid: All content can be consumed as a single static panel
+- ✅ Core visual element needs to remain visible throughout the narrative (chart/image/diagram)
+- ✅ Visual content updates/switches in stages as text progresses
+- ✅ Textual explanation is lengthy and needs multiple steps to unfold
+- ✅ Visual and text are complementary (not simple repetition)
+- ❌ Avoid: Visual content is completely static with no changes
+- ❌ Avoid: Text and visual can be understood completely separately
 
 ## Use Cases
 

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Map, { Marker, type MapRef } from 'react-map-gl/mapbox';
 
-import StickySideScrollytelling, {
+import {
+  StickySideScrollytelling,
   type StickySideMediaRenderProps,
   type StickySideStepRenderProps,
 } from '@/components/prebuild/scrollytelling/StickySide';

@@ -64,7 +64,7 @@ export default function BarChartVerticalTimelineDemo({ mediaSide = 'right' }: { 
     <VerticalTimeline
       steps={CHART_TIMELINE_STEPS.length}
       stepRatio={0.4}
-      mediaMinHeight="60vh"
+      stepMinHeight="60vh"
       mediaSide={mediaSide}
       getMediaKey={() => 'bar-chart'}
       StepComponent={BarChartTimelineStep}

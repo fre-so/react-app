@@ -8,7 +8,6 @@
 - `stepClassName?: string`: wrapper class for each step.
 - `mediaClassName?: string`: wrapper class for media area.
 - `stepMinHeight?: string`: per-step minimum height, default `"80vh"`.
-- `mediaMinHeight?: string`: media panel minimum height, default `"80vh"`.
 - `stepRatio?: number`: step column width ratio (0–1). Media uses `1 - stepRatio`. Default `0.5`. Set smaller for wider media.
 - `getMediaKey?: (stepIndex) => string | number`: group adjacent steps by key.
 - `StepComponent`: required, renders step content.
@@ -42,7 +41,7 @@ type RenderProps = {
 
 - Basic Example:
 ```tsx
-import StickySideScrollytelling from "@/components/prebuild/scrollytelling/StickySide"
+import { StickySideScrollytelling } from "@/components/prebuild/scrollytelling/StickySide"
 
 const data = [
   { title: "Find the issue", body: "Users drop on step 2.", media: "/img/01.png" },
@@ -78,7 +77,6 @@ export default function Demo() {
       steps={data.length}
       mediaSide="right"
       stepMinHeight="70vh"
-      mediaMinHeight="75vh"
       StepComponent={Step}
       MediaComponent={Media}
     />
@@ -91,7 +89,8 @@ export default function Demo() {
 import { useEffect, useRef, useState } from 'react';
 import Map, { Marker, type MapRef } from 'react-map-gl/mapbox';
 
-import StickySideScrollytelling, {
+import {
+  StickySideScrollytelling,
   type StickySideMediaRenderProps,
   type StickySideStepRenderProps,
 } from '@/components/prebuild/scrollytelling/StickySide';
@@ -185,7 +184,8 @@ export function MapStickySideSection({ mediaSide }: MapStickySideSectionProps) {
 ```tsx
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from 'recharts';
 
-import StickySideScrollytelling, {
+import {
+  StickySideScrollytelling,
   type StickySideMediaRenderProps,
   type StickySideStepRenderProps,
 } from '@/components/prebuild/scrollytelling/StickySide';
@@ -254,7 +254,7 @@ export function RadarStickySideSection({ mediaSide }: RadarStickySideSectionProp
       mediaSide={mediaSide}
       steps={RADAR_STICKY_STEPS.length}
       stepRatio={0.4}
-      mediaMinHeight="60vh"
+      stepMinHeight="60vh"
       getMediaKey={() => 'radar-sticky'}
       StepComponent={RadarStickySideStep}
       MediaComponent={RadarStickySideMedia}

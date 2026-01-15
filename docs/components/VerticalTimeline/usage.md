@@ -8,7 +8,6 @@
 - `mediaClassName?: string`: media wrapper class.
 - `stepRatio?: number`: step column width ratio (0-1), default `0.5`.
 - `stepMinHeight?: string`: per-step minimum height, default `"80vh"`.
-- `mediaMinHeight?: string`: media minimum height, default `"80vh"`.
 - `getMediaKey?: (stepIndex) => string | number`: group adjacent steps by key.
 - `StepComponent`: required, renders step content.
 - `MediaComponent`: required, renders media content.
@@ -83,7 +82,6 @@ export default function Demo() {
       steps={timeline.length}
       stepRatio={0.55}
       stepMinHeight="65vh"
-      mediaMinHeight="70vh"
       StepComponent={Step}
       MediaComponent={Media}
     />
@@ -217,7 +215,7 @@ export default function BarChartVerticalTimelineDemo({ mediaSide = 'right' }: { 
     <VerticalTimeline
       steps={CHART_TIMELINE_STEPS.length}
       stepRatio={0.4}
-      mediaMinHeight="60vh"
+      stepMinHeight="60vh"
       mediaSide={mediaSide}
       getMediaKey={() => 'bar-chart'}
       StepComponent={BarChartTimelineStep}
