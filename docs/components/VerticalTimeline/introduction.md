@@ -22,9 +22,7 @@ Selection signals:
 - ✅ Content follows clear temporal sequence (dates, phases, stages)
 - ✅ Reader needs to understand "where they are" in the overall progression
 - ✅ Each step has distinct visual/media representation
-- ✅ 4-10 major milestones (too few = overkill, too many = cluttered)
 - ❌ Avoid: Non-sequential content or concepts with no natural ordering
-- ❌ Avoid: Steps too numerous (>12) or too sparse (<3)
 
 ## Use Cases
 

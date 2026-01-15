@@ -1,7 +1,7 @@
 ## VerticalTimeline Component Usage
 
 ### Props
-- `steps?: number`: step count, default `5`, max `8`.
+- `steps?: number`: step count, default `5`.
 - `mediaSide?: "left" | "right"`: media position on large screens.
 - `className?: string`: section wrapper class.
 - `stepClassName?: string`: step content wrapper class.

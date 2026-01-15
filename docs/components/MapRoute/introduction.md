@@ -22,7 +22,6 @@ Selection signals:
 - ✅ Spatial relationships and distances are important to understand
 - ✅ Route serves as reference or context within larger content
 - ✅ MapRoute needs to pair with scrollytelling or timeline components for narrative context
-- ✅ 2-8 key waypoints that define the journey
 - ❌ Avoid: Need step-by-step narrative for each location (use MapTimeline)
 - ❌ Avoid: Map should be the primary scrolling storytelling element
 
