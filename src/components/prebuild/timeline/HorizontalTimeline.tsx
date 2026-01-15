@@ -1,4 +1,4 @@
-import { motion, useMotionValueEvent, useScroll, useSpring } from 'motion/react';
+import { motion, useMotionValueEvent, useScroll, useSpring, useTransform } from 'motion/react';
 import { useCallback, useEffect, useMemo, useRef, useState, type ComponentType } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -45,9 +45,10 @@ export function HorizontalTimeline({
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+    offset: ['-20vh start', 'end end'],
   });
-  const smoothProgress = useSpring(scrollYProgress, {
+  const normalizedProgress = useTransform(scrollYProgress, [0, 0.9], [0, 1], { clamp: true });
+  const smoothProgress = useSpring(normalizedProgress, {
     stiffness: 120,
     damping: 24,
     mass: 0.2,
@@ -81,29 +82,12 @@ export function HorizontalTimeline({
     setActiveIndex((prev) => Math.min(prev, Math.max(stepCount - 1, 0)));
   }, [stepCount]);
 
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+  useMotionValueEvent(normalizedProgress, 'change', (latest) => {
     if (!stepCount) return;
     const clamped = Math.max(0, Math.min(latest, 1));
     const nextIndex = Math.min(stepCount - 1, Math.floor(clamped * (stepCount - 1)));
     setActiveIndex(nextIndex);
   });
-
-  const scrollToStep = (index: number) => {
-    if (typeof window === 'undefined') return;
-    const section = sectionRef.current;
-    if (!section || !stepCount) return;
-
-    const rect = section.getBoundingClientRect();
-    const sectionTop = window.scrollY + rect.top;
-    const scrollRange = section.offsetHeight - window.innerHeight;
-    if (scrollRange <= 0) return;
-
-    const clampedIndex = Math.max(0, Math.min(index, stepCount - 1));
-    const targetProgress = (clampedIndex + 0.001) / stepCount;
-    const targetScroll = sectionTop + targetProgress * scrollRange;
-
-    window.scrollTo({ top: targetScroll, behavior: 'auto' });
-  };
 
   if (!stepCount) return null;
 
@@ -138,15 +122,10 @@ export function HorizontalTimeline({
                     const isPassed = index < activeIndex;
                     return (
                       <li key={`step-${index}`} className="relative flex flex-1 flex-col items-center text-center">
-                        <button
-                          type="button"
-                          onClick={() => scrollToStep(index)}
-                          className="group flex cursor-pointer flex-col items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-                          aria-current={isActive ? 'step' : undefined}
-                        >
+                        <div className="flex flex-col items-center gap-2" aria-current={isActive ? 'step' : undefined}>
                           <span
                             className={cn(
-                              'flex h-3 w-3 items-center justify-center rounded-full border-2 transition-colors group-hover:border-primary group-hover:bg-primary',
+                              'flex h-3 w-3 items-center justify-center rounded-full border-2 transition-colors',
                               isActive
                                 ? 'border-primary bg-primary ring-4 ring-primary/20'
                                 : isPassed
@@ -155,9 +134,9 @@ export function HorizontalTimeline({
                             )}
                           />
                           <div className={cn('w-full', stepClassName)}>
-                            <StepComponent stepIndex={index} isActive={isActive} scrollProgress={scrollYProgress} />
+                            <StepComponent stepIndex={index} isActive={isActive} scrollProgress={normalizedProgress} />
                           </div>
-                        </button>
+                        </div>
                       </li>
                     );
                   })}
@@ -178,7 +157,7 @@ export function HorizontalTimeline({
                       activeStepIndex={activeIndex}
                       inactiveOffset={inactiveOffset}
                       stepCount={stepCount}
-                      scrollProgress={scrollYProgress}
+                      scrollProgress={normalizedProgress}
                       mediaClassName={mediaClassName}
                       MediaComponent={MediaComponent}
                     />

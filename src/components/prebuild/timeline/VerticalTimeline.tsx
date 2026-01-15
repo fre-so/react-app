@@ -20,7 +20,6 @@ export type VerticalTimelineProps = {
   mediaClassName?: string;
   stepRatio?: number;
   stepMinHeight?: string;
-  mediaMinHeight?: string;
   getMediaKey?: (stepIndex: number) => string | number;
   StepComponent: ComponentType<TimelineStepRenderProps>;
   MediaComponent: ComponentType<TimelineMediaRenderProps>;
@@ -33,8 +32,7 @@ export function VerticalTimeline({
   stepClassName,
   mediaClassName,
   stepRatio = 0.5,
-  stepMinHeight = '60vh',
-  mediaMinHeight = '80vh',
+  stepMinHeight = '80vh',
   getMediaKey,
   StepComponent,
   MediaComponent,
@@ -54,7 +52,7 @@ export function VerticalTimeline({
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+    offset: ['-20vh start', 'end end'],
   });
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -97,23 +95,6 @@ export function VerticalTimeline({
     setActiveIndex(nextIndex);
   });
 
-  const scrollToStep = (index: number) => {
-    if (typeof window === 'undefined') return;
-    const section = sectionRef.current;
-    if (!section || !stepCount) return;
-
-    const rect = section.getBoundingClientRect();
-    const sectionTop = window.scrollY + rect.top;
-    const scrollRange = section.offsetHeight - window.innerHeight;
-    if (scrollRange <= 0) return;
-
-    const clampedIndex = Math.max(0, Math.min(index, stepCount - 1));
-    const targetProgress = (clampedIndex + 0.001) / stepCount;
-    const targetScroll = sectionTop + targetProgress * scrollRange;
-
-    window.scrollTo({ top: targetScroll, behavior: 'auto' });
-  };
-
   if (!stepCount) return null;
 
   const lineInset = stepCount > 1 ? `${50 / stepCount}%` : '50%';
@@ -121,10 +102,7 @@ export function VerticalTimeline({
   return (
     <section ref={sectionRef} className={cn('bg-background text-foreground', className)}>
       <div
-        className={cn(
-          'mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16 lg:flex-row',
-          isMediaLeft && 'lg:flex-row-reverse'
-        )}
+        className={cn('mx-auto flex max-w-6xl flex-col gap-12 px-6 lg:flex-row', isMediaLeft && 'lg:flex-row-reverse')}
       >
         <div style={{ flexBasis: 0, flexGrow: computedStepRatio }}>
           <div className="relative">
@@ -143,15 +121,13 @@ export function VerticalTimeline({
                 const isPassed = index < activeIndex;
                 return (
                   <li key={`step-${index}`} className="relative flex items-center" style={{ minHeight: stepMinHeight }}>
-                    <button
-                      type="button"
-                      onClick={() => scrollToStep(index)}
-                      className="group relative flex w-full cursor-pointer items-center pl-8 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                    <div
+                      className="relative flex w-full items-center pl-8 text-left"
                       aria-current={isActive ? 'step' : undefined}
                     >
                       <span
                         className={cn(
-                          'absolute left-4 top-1/2 flex h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 transition-colors group-hover:border-primary group-hover:bg-primary',
+                          'absolute left-4 top-1/2 flex h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 transition-colors',
                           isActive
                             ? 'border-primary bg-primary ring-4 ring-primary/20'
                             : isPassed
@@ -162,7 +138,7 @@ export function VerticalTimeline({
                       <div className={cn('w-full', stepClassName)}>
                         <StepComponent stepIndex={index} isActive={isActive} scrollProgress={scrollYProgress} />
                       </div>
-                    </button>
+                    </div>
                   </li>
                 );
               })}
@@ -178,7 +154,7 @@ export function VerticalTimeline({
               visibility: stickyTop === null ? 'hidden' : 'visible',
             }}
           >
-            <div ref={mediaFrameRef} className="relative w-full" style={{ minHeight: mediaMinHeight }}>
+            <div ref={mediaFrameRef} className="relative w-full" style={{ minHeight: stepMinHeight }}>
               {mediaGroups.map((group) => {
                 const isActive = activeIndex >= group.startIndex && activeIndex <= group.endIndex;
                 const inactiveOffset = group.endIndex < activeIndex ? -24 : 24;
