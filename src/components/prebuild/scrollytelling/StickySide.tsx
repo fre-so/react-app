@@ -71,7 +71,7 @@ function buildMediaGroups(stepCount: number, getMediaKey: (stepIndex: number) =>
   return groups;
 }
 
-export default function StickySideScrollytelling({
+export function StickySideScrollytelling({
   steps = DEFAULT_STEP_COUNT,
   mediaSide = 'right',
   scrollContainerRef,
