@@ -13,7 +13,6 @@ export type TimelineMediaRenderProps = {
 };
 
 export const DEFAULT_STEP_COUNT = 5;
-export const MAX_STEP_COUNT = 8;
 
 export type MediaGroup = {
   key: string | number;
