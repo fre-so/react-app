@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { TimelineMediaGroup } from './MediaGroup';
 import {
   DEFAULT_STEP_COUNT,
-  MAX_STEP_COUNT,
   buildMediaGroups,
   type TimelineMediaRenderProps,
   type TimelineStepRenderProps,
@@ -42,7 +41,7 @@ export function VerticalTimeline({
   const [activeIndex, setActiveIndex] = useState(0);
   const [stickyTop, setStickyTop] = useState<number | null>(null);
   const isMediaLeft = mediaSide === 'left';
-  const stepCount = Math.max(0, Math.min(MAX_STEP_COUNT, Math.floor(steps)));
+  const stepCount = Math.max(0, Math.floor(steps));
   const normalizedStepRatio =
     typeof stepRatio === 'number' && Number.isFinite(stepRatio) ? Math.min(Math.max(stepRatio, 0), 1) : 0.5;
   const computedStepRatio = normalizedStepRatio;

@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { TimelineMediaGroup } from './MediaGroup';
 import {
   DEFAULT_STEP_COUNT,
-  MAX_STEP_COUNT,
   buildMediaGroups,
   type TimelineMediaRenderProps,
   type TimelineStepRenderProps,
@@ -39,7 +38,7 @@ export function HorizontalTimeline({
   const stickyContentRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [stickyTop, setStickyTop] = useState<number | null>(null);
-  const stepCount = Math.max(0, Math.min(MAX_STEP_COUNT, Math.floor(steps)));
+  const stepCount = Math.max(0, Math.floor(steps));
   const resolveMediaKey = useCallback((index: number) => (getMediaKey ? getMediaKey(index) : index), [getMediaKey]);
   const mediaGroups = useMemo(() => buildMediaGroups(stepCount, resolveMediaKey), [stepCount, resolveMediaKey]);
 
