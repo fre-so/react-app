@@ -62,6 +62,7 @@ function MapStickySideMedia({ stepIndex }: StickySideMediaRenderProps) {
         dragPan={false}
         reuseMaps
         style={{ width: '100%', height: '100%' }}
+        preserveDrawingBuffer={true}
       >
         <Marker longitude={step.coordinate[0]} latitude={step.coordinate[1]} anchor="center">
           <div className="h-3 w-3 rounded-full bg-primary shadow ring-4 ring-primary/20" />

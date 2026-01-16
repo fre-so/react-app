@@ -4,6 +4,7 @@ import { BarChartDrilldownDemo } from "./bar-chart-drilldown"
 import { LineChartDrilldownDemo } from "./line-chart-drilldown"
 import { PieChartDrilldownDemo } from "./pie-chart-drilldown"
 import { RadarChartDrilldownDemo } from "./radar-chart-drilldown"
+import { QuadrantChartDemo } from "./quadrant-chart"
 
 export const DATA_CONTROLS = {} as const satisfies ControlConfigMap
 
@@ -48,6 +49,16 @@ export const DATA_NAV_ITEMS = [
       eyebrow: "Data",
       description: "Radar clicks open the selected dimension details.",
       render: () => <RadarChartDrilldownDemo />,
+    },
+  },
+  {
+    id: "quadrant-chart",
+    title: "Quadrant Chart",
+    controls: [],
+    section: {
+      eyebrow: "Data",
+      description: "Scatter quadrant chart with center axes and directional labels.",
+      render: () => <QuadrantChartDemo />,
     },
   },
 ] satisfies ComponentsGalleryNavItem<DataControlId>[]

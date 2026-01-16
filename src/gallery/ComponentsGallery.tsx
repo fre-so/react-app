@@ -109,39 +109,41 @@ export default function ComponentsGallery() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <aside className="fixed left-0 top-0 h-screen w-72 border-r border-border p-6">
+      <aside className="fixed left-0 top-0 flex h-screen w-72 flex-col border-r border-border p-6">
         <div className="space-y-1">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">Components</p>
           <h1 className="text-lg font-semibold">Demo Gallery</h1>
         </div>
 
-        <nav className="mt-6 space-y-2">
-          {COMPONENTS_GALLERY_NAV.map((item) => {
-            const isActive = item.id === activeComponentId;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                aria-current={isActive ? 'page' : undefined}
-                className={cn(
-                  'w-full cursor-pointer border border-border px-3 py-2 text-left text-sm font-medium transition-colors hover:bg-muted/60',
-                  isActive && 'bg-muted'
-                )}
-                onClick={() => setActiveComponentId(item.id)}
-              >
-                {item.title}
-              </button>
-            );
-          })}
-        </nav>
+        <div className="mt-6 flex min-h-0 flex-1 flex-col overflow-y-auto pr-2">
+          <nav className="space-y-2">
+            {COMPONENTS_GALLERY_NAV.map((item) => {
+              const isActive = item.id === activeComponentId;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-current={isActive ? 'page' : undefined}
+                  className={cn(
+                    'w-full cursor-pointer border border-border px-3 py-2 text-left text-sm font-medium transition-colors hover:bg-muted/60',
+                    isActive && 'bg-muted'
+                  )}
+                  onClick={() => setActiveComponentId(item.id)}
+                >
+                  {item.title}
+                </button>
+              );
+            })}
+          </nav>
 
-        <div className="mt-10 border-t border-border pt-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">Controls</p>
-          {hasControls ? (
-            <div className="mt-4 space-y-6">{activeControls.map((controlId) => renderControl(controlId))}</div>
-          ) : (
-            <p className="mt-4 text-sm text-muted-foreground">Select a component to see its controls.</p>
-          )}
+          <div className="mt-10 border-t border-border pt-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">Controls</p>
+            {hasControls ? (
+              <div className="mt-4 space-y-6">{activeControls.map((controlId) => renderControl(controlId))}</div>
+            ) : (
+              <p className="mt-4 text-sm text-muted-foreground">Select a component to see its controls.</p>
+            )}
+          </div>
         </div>
       </aside>
 
@@ -156,7 +158,7 @@ export default function ComponentsGallery() {
                 <h2 className="mt-2 text-xl font-semibold">{activeComponent.title}</h2>
                 <p className="mt-2 text-sm text-muted-foreground">{activeComponent.section.description}</p>
               </div>
-              <div className="border border-border">
+              <div className="">
                 {activeComponent.section.render({
                   mediaSide,
                   mapRouteProgress: resolvedMapRouteProgress,
