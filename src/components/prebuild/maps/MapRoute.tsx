@@ -529,6 +529,7 @@ export function MapRoute({
         scrollZoom={false}
         reuseMaps
         style={{ width: '100%', height: '100%' }}
+        preserveDrawingBuffer={true}
       >
         {visibleRouteData ? (
           <Source id="route" type="geojson" data={visibleRouteData}>
