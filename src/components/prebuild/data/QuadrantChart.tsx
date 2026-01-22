@@ -34,6 +34,8 @@ type QuadrantAxisConfig = {
   startLabel?: React.ReactNode;
   endLabel?: React.ReactNode;
   label?: React.ReactNode;
+  width?: number;
+  height?: number;
   axisArrow?: AxisArrowStyleProps;
 };
 
@@ -41,8 +43,6 @@ export type QuadrantChartProps = Omit<React.ComponentProps<typeof ScatterChart>,
   children?: React.ReactNode;
   xAxis?: QuadrantAxisConfig;
   yAxis?: QuadrantAxisConfig;
-  xAxisLabelHeight?: number;
-  yAxisLabelWidth?: number;
 };
 
 const DEFAULT_CHART_MARGIN = {
@@ -59,12 +59,10 @@ export function QuadrantChart({
   className,
   xAxis,
   yAxis,
-  xAxisLabelHeight,
-  yAxisLabelWidth,
   ...chartProps
 }: QuadrantChartProps) {
-  const leftPadding = yAxisLabelWidth ?? DEFAULT_AXIS_LABEL_WIDTH;
-  const bottomPadding = xAxisLabelHeight ?? DEFAULT_AXIS_LABEL_HEIGHT;
+  const leftPadding = yAxis?.width ?? DEFAULT_AXIS_LABEL_WIDTH;
+  const bottomPadding = xAxis?.height ?? DEFAULT_AXIS_LABEL_HEIGHT;
   const { margin, ...restChartProps } = chartProps;
   const resolvedMargin = {
     ...DEFAULT_CHART_MARGIN,
@@ -84,12 +82,14 @@ export function QuadrantChart({
         startLabel={xAxis?.startLabel}
         endLabel={xAxis?.endLabel}
         label={xAxis?.label}
+        width={xAxis?.width}
         {...(xAxis?.axisArrow ?? {})}
       />
       <AxisArrowVertical
         startLabel={yAxis?.startLabel}
         endLabel={yAxis?.endLabel}
         label={yAxis?.label}
+        height={yAxis?.height}
         {...(yAxis?.axisArrow ?? {})}
       />
     </ScatterChart>
@@ -100,12 +100,15 @@ type AxisArrowProps = {
   startLabel?: React.ReactNode;
   endLabel?: React.ReactNode;
   label?: React.ReactNode;
+  width?: number;
+  height?: number;
 };
 
 function AxisArrowHorizontal({
   startLabel,
   endLabel,
   label,
+  width,
   labelColor = 'var(--color-muted-foreground)',
   lineColor = 'var(--color-muted-foreground)',
   edgeLabelFontSize = 16,
@@ -126,10 +129,11 @@ function AxisArrowHorizontal({
   const bottomAreaTop = plotArea.y + plotArea.height;
   const arrowY = bottomAreaTop + offset.bottom * 0.4;
   const labelY = arrowY + labelVerticalGap;
-  const lineStartX = plotArea.x + plotArea.width * 0.33;
-  const lineEndBaseX = plotArea.x + plotArea.width * 0.66;
-  const arrowEndX = Math.max(lineStartX, lineEndBaseX);
-  const lineEndX = arrowEndX;
+  const axisWidth = Math.max(0, Math.min(width ?? plotArea.width / 3, plotArea.width));
+  const centerX = plotArea.x + plotArea.width / 2;
+  const lineStartX = centerX - axisWidth / 2;
+  const lineEndX = centerX + axisWidth / 2;
+  const arrowEndX = lineEndX;
 
   return (
     <g className="text-muted-foreground">
@@ -199,6 +203,7 @@ function AxisArrowVertical({
   startLabel,
   endLabel,
   label,
+  height,
   labelColor = 'var(--color-muted-foreground)',
   lineColor = 'var(--color-muted-foreground)',
   edgeLabelFontSize = 16,
@@ -218,11 +223,11 @@ function AxisArrowVertical({
 
   const arrowX = plotArea.x - offset.left * 0.4;
   const labelX = arrowX - labelHorizontalGap;
-  const lineStartBaseY = plotArea.y + plotArea.height * 0.66;
-  const lineEndBaseY = plotArea.y + plotArea.height * 0.33;
-  const arrowTipY = Math.min(lineStartBaseY, lineEndBaseY);
-  const lineStartY = Math.max(lineStartBaseY, arrowTipY);
-  const lineEndY = arrowTipY;
+  const axisHeight = Math.max(0, Math.min(height ?? plotArea.height / 3, plotArea.height));
+  const centerY = plotArea.y + plotArea.height / 2;
+  const lineStartY = centerY + axisHeight / 2;
+  const lineEndY = centerY - axisHeight / 2;
+  const arrowTipY = lineEndY;
   const endLabelY = lineEndY - labelVerticalGap;
   const startLabelY = lineStartY + labelVerticalGap;
 
